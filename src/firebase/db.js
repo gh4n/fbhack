@@ -13,8 +13,10 @@ export const onceGetUsers = () =>
 
 
 export const addComment = (imageId, comment) => {
-  let imgRef = db.ref('photos').child(imageId);
-  imgRef.update({comment: comment})
+  let imgRef = db.ref('photos').child(imageId).child('comment');
+  console.log(imageId);
+  console.log(imgRef);
+  imgRef.push(comment)
 }
 
 
@@ -23,6 +25,14 @@ export const addPhoto = () =>
       image_url: "images/image1.jpg",
       comments: {}
     });
+
+export const getComments = (imageId) => {
+   // returns json of all comments for a specific image path
+    let data = db.ref('photos').child(imageId).child('comment');
+    data.on('value', function(snapshot) {
+      return snapshot.val();
+    });
+}
 
 
 

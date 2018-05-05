@@ -4,7 +4,7 @@ import withAuthorization from '../Session/withAuthorization';
 import AuthUserContext from '../Session/AuthUserContext';
 
 
-class AddComment extends React.Component {
+class ViewImage extends React.Component {
     constructor(props) {
       super(props);
       this.state = {value: ''};
@@ -23,7 +23,7 @@ class AddComment extends React.Component {
       var id = "-LBj6CPn9DVXmwr8BBLd";
       db.addComment(id, {"text": this.state.value, "user": "Hello", "x": "400", "y": "400"});
       db.getComments(id);
-      console.log(this.props.id);
+      console.log(this.props);
 
     }
   
@@ -38,11 +38,12 @@ class AddComment extends React.Component {
                 <input type="submit" value="Submit" />
             </form>
 
-            <img width="500" height="500" src="images/image1.jpg"/>
+            <img width="500" height="500" src="../images/image1.jpg"/>
         </div>
       );
     }
   }
+  
 const authCondition = (authUser) => !!authUser;
 
-export default withAuthorization(authCondition)(AddComment);
+export default withAuthorization(authCondition)(ViewImage);
