@@ -72,7 +72,7 @@ window.onload = function() {
 	}
 }
 
-function create_node(x, y, text="") {
+function create_node(x, y, text="a") {
 	var btn = document.createElement("PARAGRAPH");
 	var t = document.createTextNode("+");
 	btn.style.size = "100";
@@ -82,7 +82,7 @@ function create_node(x, y, text="") {
 	btn.style.position = "absolute";
 	btn.className = "tooltip";
 	if (text.length !== 0) {
-		console.log("AASD")
+		console.log(text)
 		var spanEl = document.createElement("SPAN")
 		spanEl.className = "tooltiptext"
 		spanEl.textContent = ""
