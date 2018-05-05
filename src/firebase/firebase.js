@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 
 const prodConfig = {
-  apiKey: "",
+  apiKey: "AIzaSyBXtdT0mUa200bNcq_1vyGbfKqTNn88ngc",
   authDomain: "facebook-hack-1525489263960.firebaseapp.com",
   databaseURL: "https://facebook-hack-1525489263960.firebaseio.com",
   projectId: "facebook-hack-1525489263960",
@@ -10,7 +10,7 @@ const prodConfig = {
 };
 
 const devConfig = {
-  apiKey: "c",
+  apiKey: "AIzaSyBXtdT0mUa200bNcq_1vyGbfKqTNn88ngc",
   authDomain: "facebook-hack-1525489263960.firebaseapp.com",
   databaseURL: "https://facebook-hack-1525489263960.firebaseio.com",
   projectId: "facebook-hack-1525489263960",

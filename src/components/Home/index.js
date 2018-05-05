@@ -1,46 +1,37 @@
 import React, { Component } from 'react';
 
+// Material UI Mext Components
+import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
+
+// Images
+import Logo from '../../images/sample.jpg';
+
 import withAuthorization from '../Session/withAuthorization';
-import { db } from '../../firebase';
 
 class HomePage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      users: {}
-    };
-  }
-
-  componentDidMount() {
-    db.onceGetUsers().then(snapshot =>
-      this.setState(() => ({ users: snapshot.val() }))
-    );
-  }
-
   render() {
-    const { users } = this.state;
-
     return (
-      <div>
-        <h1>Home</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
+      <Grid container spacing={24}>
+        <Grid item xs={4}>
 
-        { !!users && <UserList users={users} /> }
-      </div>
+        </Grid>
+        <Grid item xs={4}>
+          <Typography variant="subheading" style={{ fontSize: 12, textTransform: 'uppercase', fontWeight: 300, lineHeight: '19px' }}>
+            April 14, 2018
+          </Typography>
+          <Typography variant="title" style={{ fontSize: 16, textTransform: 'uppercase', fontWeight: 400, lineHeight: '19px', letterSpacing: '0.5px', paddingBottom: 14 }}>
+            user / grace.han
+          </Typography>
+          <img src={Logo} style={{ width: '100%' }} />
+        </Grid>
+        <Grid item xs={4}>
+
+        </Grid>
+      </Grid>
     );
   }
 }
-
-const UserList = ({ users }) =>
-  <div>
-    <h2>List of Usernames of Users</h2>
-    <p>(Saved on Sign Up in Firebase Database)</p>
-
-    {Object.keys(users).map(key =>
-      <div key={key}>{users[key].username}</div>
-    )}
-  </div>
 
 const authCondition = (authUser) => !!authUser;
 

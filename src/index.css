@@ -3,3 +3,23 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+hr {
+  border: 0;
+  height: 1px;
+  background: #f6f6f6;
+}
+ul {
+  list-style: none;
+  text-align: right;
+}
+ul > li {
+  margin: 10px;
+  list-style: none;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+ul > li > a {
+  color: #a6a6a6;
+  text-decoration: none;
+}
