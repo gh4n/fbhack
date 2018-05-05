@@ -32,6 +32,9 @@
 var points = [[127, 107, "Looking fine!"], [220, 170, "Nice!"], [220, 204, "HAHAHA!"]]
 var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]]
 
+var x_to_add = 0
+var y_to_add = 0
+
 function point_it(event){
 
 	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
@@ -54,8 +57,12 @@ function point_it(event){
 	// para.style.position = "absolute";
 
 
+	caption_field = document.getElementById("caption")
+	caption_field.hidden = ""
+	x_to_add = pos_x-1
+	y_to_add = pos_y-15
 
-	create_node(pos_x-1, pos_y-15)
+	//create_node(pos_x-1, pos_y-15)
 
 }
 	
@@ -75,6 +82,7 @@ function create_node(x, y, text="") {
 	btn.style.position = "absolute";
 	btn.className = "tooltip";
 	if (text.length !== 0) {
+		console.log("AASD")
 		var spanEl = document.createElement("SPAN")
 		spanEl.className = "tooltiptext"
 		spanEl.textContent = ""
@@ -86,10 +94,13 @@ function create_node(x, y, text="") {
 
 function enter_pressed(e) {
     if (e.keyCode == 13) {
-        console.log("PRESSED")
+		var caption_field = document.getElementById('caption')
+		console.log(caption_field.value)
+        create_node(x_to_add, y_to_add, caption_field.text)
         return false;
     }
 }
+
 </script>
 </head>
 <body>
@@ -97,7 +108,7 @@ function enter_pressed(e) {
 <div id="pointer_div" onclick="point_it(event)" style = "background-image:url('eiffel.jpg');width:500px;height:333px;">
 <img src="point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;"></div>
 
-<input type="text" id="caption" size="100" type="hidden" onkeypress="return enter_pressed(event)"/>
+<input type="text" id="caption" size="100" hidden="true" onkeypress="return enter_pressed(event)"/>
 </form> 
 
 </body>
