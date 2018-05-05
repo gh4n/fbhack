@@ -5,12 +5,12 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-      var points = [[127, 107, "Looking fine!"], [220, 170, "Nice!"], [220, 204, "HAHAHA!"]];
+      var points = [[127, 107, '', "Looking fine!"], [220, 170, '', "Nice!"], [220, 204, '', "HAHAHA!"]];
       var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]];
       var x_to_add = 0;
       var y_to_add = 0;
 
-      function point_it(event){
+      function point_it(event) {
         pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
         pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
         // document.getElementById("tag_input").style.left = (pos_x-1);
@@ -38,14 +38,14 @@
         
       window.onload = function() {
         for (var i = 0; i < points.length; i++) { 
-          create_node(points[i][0], points[i][1])
+          create_node(points[i][0], points[i][1], points[i][2])
         }
       }
 
-      function create_node(x, y, text="") {
+      function create_node(x, y, image, text="") {
         let button = document.createElement("a");
 
-        button.setAttribute('style', `left: ${x}px; top: ${y}px`)
+        button.setAttribute('style', `left: ${x}px; top: ${y}px; background-image: url(${image});`)
         button.setAttribute('class', "tooltip")
 
         if (text) {
@@ -61,7 +61,7 @@
       function enter_pressed(event) {
         if (event.keyCode == 13) {
           document.getElementById("caption").setAttribute('style', "visibility: hidden;");
-          create_node(x_to_add, y_to_add, $('#caption-text').val());
+          create_node(x_to_add, y_to_add, './profile.png', $('#caption-text').val());
           $('#caption-text').val("");
           return false;
         }
