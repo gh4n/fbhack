@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <script type="text/javascript">
-	    var points = [{"id": 0, "x": 152, "y": 452, "text": "Hi", "emoji": "", "image": './zuck.jpg', "name": "Taylor"}, {"id": 1, "x": 807, "y": 227, "text": "Nice", "emoji": "", "image": "./zuck.jpg", "name": "Taylor"}, {"id": 2, "x": 1114, "y": 216, "text": "HAHAHA!", "emoji": "", "image": "./zuck.jpg", "name": "Taylor"}]
+	    var points = [{"id": 0, "x": 152, "y": 452, "text": "Hi", "emoji": "", "image": './zuck.jpg', "name": "Zuck"}, {"id": 1, "x": 182, "y": 675, "text": "Nice", "emoji": "", "image": "./stallman.png", "name": ""}, {"id": 2, "x": 506, "y": 639, "text": "HAHAHA!", "emoji": "", "image": "./tim.png", "name": "Taylor"}, {"id": 2, "x": 497, "y": 178, "text": "HAHAHA!", "emoji": "", "image": "./backman.jpg", "name": "Taylor"}, {"id": 2, "x": 219, "y": 178, "text": "HAHAHA!", "emoji": "", "image": "./bill.png", "name": "Taylor"}]
       var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]];
       var x_to_add = 0;
       var y_to_add = 0;
@@ -43,6 +43,8 @@
 
       function create_node(x, y, image, text="", emoji="", name) {
         let button = document.createElement("a");
+        console.log(x)
+        console.log(y)
 
         button.setAttribute('style', `left: ${x}px; top: ${y}px; background-image: url(${image});`)
         button.setAttribute('class', "tooltip")
@@ -72,7 +74,7 @@
       function enter_pressed(event) {
         if (event.keyCode == 13) {
           document.getElementById("caption").setAttribute('style', "visibility: hidden;");
-          create_node(x_to_add, y_to_add, './h.png', $('#caption-text').val(), "", "Harry");
+          create_node(x_to_add, y_to_add, './linus.png', $('#caption-text').val(), "", "Linus");
           $('#caption-text').val("");
           return false;
         }
@@ -82,9 +84,9 @@
         document.getElementById("caption").setAttribute('style', "visibility: hidden;");
         // create_node(x_to_add, y_to_add, "", emoji_text)
         // var new_point = {"id": s_id, "x": x_to_add, "y": y_to_add, "text": "", "emoji": emoji_text}
-        create_node(x_to_add, y_to_add, './h.png', "", emoji_text, "Harry");
+        create_node(x_to_add, y_to_add, './linus.png', "", emoji_text, "Harry");
 
-        var new_point = {"id": s_id, "x": x_to_add, "y": y_to_add, "text": "", "emoji": emoji_text, "image:":"./h.png", "name": "Harry"}
+        var new_point = {"id": s_id, "x": x_to_add, "y": y_to_add, "text": "", "emoji": emoji_text, "image:":"./linus.png", "name": "Linus"}
         s_id++
         points.push(new_point)
       
@@ -122,7 +124,7 @@
   </button>
   <div>
       <div id="big_image">
-          <img src="cool.jpg"/ id="pointer_div" onclick="point_it(event)" width="1720" height="880">
+          <img src="asdasdasd.png"/ id="pointer_div" onclick="point_it(event)" width="1000" height="930">
       </div>
       <div id="rightbar"></div>
 
