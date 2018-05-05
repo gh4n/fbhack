@@ -72,7 +72,7 @@ window.onload = function() {
 	}
 }
 
-function create_node(x, y, text="a") {
+function create_node(x, y, text="") {
 	var btn = document.createElement("PARAGRAPH");
 	var t = document.createTextNode("+");
 	btn.style.size = "100";
@@ -81,11 +81,10 @@ function create_node(x, y, text="a") {
 	btn.style.visibility = "visible";
 	btn.style.position = "absolute";
 	btn.className = "tooltip";
-	if (text.length !== 0) {
-		console.log(text)
+	if (text) {
 		var spanEl = document.createElement("SPAN")
 		spanEl.className = "tooltiptext"
-		spanEl.textContent = ""
+		spanEl.textContent = text
 		btn.appendChild(spanEl)
 	}
 	btn.appendChild(t);
@@ -96,7 +95,7 @@ function enter_pressed(e) {
     if (e.keyCode == 13) {
 		var caption_field = document.getElementById('caption')
 		console.log(caption_field.value)
-        create_node(x_to_add, y_to_add, caption_field.text)
+        create_node(x_to_add, y_to_add, caption_field.value)
         return false;
     }
 }
