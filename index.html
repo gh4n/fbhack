@@ -1,0 +1,104 @@
+<html>
+<head>
+<style>
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+</style>
+
+
+</style>
+<script language="JavaScript">
+var points = [[127, 107, "Looking fine!"], [220, 170, "Nice!"], [220, 204, "HAHAHA!"]]
+var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]]
+
+function point_it(event){
+
+	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+
+
+    // document.getElementById("tag_input").style.left = (pos_x-1);
+	// document.getElementById("tag_input").style.top = (pos_y-15);
+	// document.getElementById("tag_input").style.visibility = "visible";
+    // document.getElementById("tag_input").style.position = "absolute";
+    // document.getElementById("tag_input").style.size = "100";
+    
+	// var para = document.createElement("p");
+	// var node = document.createTextNode("This is new.");
+	// para.appendChild(node);
+
+	// para.style.left = (pos_x-1);
+	// para.style.top = (pos_y-15);
+	// para.style.visibility = "visible";
+	// para.style.position = "absolute";
+
+
+
+	create_node(pos_x-1, pos_y-15)
+
+}
+	
+window.onload = function() {
+	for (var i = 0; i < points.length; i++) { 
+		create_node(points[i][0], points[i][1])
+	}
+}
+
+function create_node(x, y, text="") {
+	var btn = document.createElement("PARAGRAPH");
+	var t = document.createTextNode("+");
+	btn.style.size = "100";
+	btn.style.left = (x);
+	btn.style.top = (y);
+	btn.style.visibility = "visible";
+	btn.style.position = "absolute";
+	btn.className = "tooltip";
+	if (text.length !== 0) {
+		var spanEl = document.createElement("SPAN")
+		spanEl.className = "tooltiptext"
+		spanEl.textContent = ""
+		btn.appendChild(spanEl)
+	}
+	btn.appendChild(t);
+	document.body.appendChild(btn);
+}
+
+function enter_pressed(e) {
+    if (e.keyCode == 13) {
+        console.log("PRESSED")
+        return false;
+    }
+}
+</script>
+</head>
+<body>
+
+<div id="pointer_div" onclick="point_it(event)" style = "background-image:url('eiffel.jpg');width:500px;height:333px;">
+<img src="point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;"></div>
+
+<input type="text" id="caption" size="100" type="hidden" onkeypress="return enter_pressed(event)"/>
+</form> 
+
+</body>
+</html>
