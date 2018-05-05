@@ -1,114 +1,101 @@
+<!doctype html>
 <html>
-<head>
-<style>
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-}
+  <head>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      var points = [[127, 107, "Looking fine!"], [220, 170, "Nice!"], [220, 204, "HAHAHA!"]];
+      var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]];
+      var x_to_add = 0;
+      var y_to_add = 0;
 
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
+      function point_it(event){
+        pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
+        pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+        // document.getElementById("tag_input").style.left = (pos_x-1);
+        // document.getElementById("tag_input").style.top = (pos_y-15);
+        // document.getElementById("tag_input").style.visibility = "visible";
+        // document.getElementById("tag_input").style.position = "absolute";
+        // document.getElementById("tag_input").style.size = "100";
+          
+        // var para = document.createElement("p");
+        // var node = document.createTextNode("This is new.");
+        // para.appendChild(node);
+        // para.style.left = (pos_x-1);
+        // para.style.top = (pos_y-15);
+        // para.style.visibility = "visible";
+        // para.style.position = "absolute";
 
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-}
+        let captionField = document.getElementById("caption");
+        x_to_add = pos_x-1;
+        y_to_add = pos_y-15;
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
-</style>
+        captionField.setAttribute('style', `left: ${x_to_add}px; top: ${y_to_add}px; visibility: visible`);
 
+        //create_node(pos_x-1, pos_y-15)
+      }
+        
+      window.onload = function() {
+        for (var i = 0; i < points.length; i++) { 
+          create_node(points[i][0], points[i][1])
+        }
+      }
 
-</style>
-<script language="JavaScript">
-var points = [[127, 107, "Looking fine!"], [220, 170, "Nice!"], [220, 204, "HAHAHA!"]]
-var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]]
+      function create_node(x, y, text="") {
+        let button = document.createElement("a");
 
-var x_to_add = 0
-var y_to_add = 0
+        button.setAttribute('style', `left: ${x}px; top: ${y}px`)
+        button.setAttribute('class', "tooltip")
 
-function point_it(event){
+        if (text) {
+          let spanEl = document.createElement("span")
+          spanEl.setAttribute('class', "tooltiptext")
+          spanEl.innerHTML = text;
+          button.appendChild(spanEl)
+        }
 
-	pos_x = event.offsetX?(event.offsetX):event.pageX-document.getElementById("pointer_div").offsetLeft;
-	pos_y = event.offsetY?(event.offsetY):event.pageY-document.getElementById("pointer_div").offsetTop;
+        document.body.appendChild(button);
+      }
 
-
-    // document.getElementById("tag_input").style.left = (pos_x-1);
-	// document.getElementById("tag_input").style.top = (pos_y-15);
-	// document.getElementById("tag_input").style.visibility = "visible";
-    // document.getElementById("tag_input").style.position = "absolute";
-    // document.getElementById("tag_input").style.size = "100";
-    
-	// var para = document.createElement("p");
-	// var node = document.createTextNode("This is new.");
-	// para.appendChild(node);
-
-	// para.style.left = (pos_x-1);
-	// para.style.top = (pos_y-15);
-	// para.style.visibility = "visible";
-	// para.style.position = "absolute";
-
-
-	caption_field = document.getElementById("caption")
-	caption_field.hidden = ""
-	x_to_add = pos_x-1
-	y_to_add = pos_y-15
-
-	//create_node(pos_x-1, pos_y-15)
-
-}
-	
-window.onload = function() {
-	for (var i = 0; i < points.length; i++) { 
-		create_node(points[i][0], points[i][1])
-	}
-}
-
-function create_node(x, y, text="") {
-	var btn = document.createElement("PARAGRAPH");
-	var t = document.createTextNode("+");
-	btn.style.size = "100";
-	btn.style.left = (x);
-	btn.style.top = (y);
-	btn.style.visibility = "visible";
-	btn.style.position = "absolute";
-	btn.className = "tooltip";
-	if (text) {
-		var spanEl = document.createElement("SPAN")
-		spanEl.className = "tooltiptext"
-		spanEl.textContent = text
-		btn.appendChild(spanEl)
-	}
-	btn.appendChild(t);
-	document.body.appendChild(btn);
-}
-
-function enter_pressed(e) {
-    if (e.keyCode == 13) {
-		var caption_field = document.getElementById('caption')
-		console.log(caption_field.value)
-        create_node(x_to_add, y_to_add, caption_field.value)
-        return false;
-    }
-}
-
-</script>
-</head>
-<body>
-
-<div id="pointer_div" onclick="point_it(event)" style = "background-image:url('eiffel.jpg');width:500px;height:333px;">
-<img src="point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;"></div>
-
-<input type="text" id="caption" size="100" hidden="true" onkeypress="return enter_pressed(event)"/>
-</form> 
-
-</body>
+      function enter_pressed(event) {
+        if (event.keyCode == 13) {
+          document.getElementById("caption").setAttribute('style', "visibility: hidden;");
+          create_node(x_to_add, y_to_add, $('#caption-text').val());
+          $('#caption-text').val("");
+          return false;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="pointer_div" onclick="point_it(event)" style = "background-image: url('eiffel.jpg'); width: 500px; height: 333px;">
+    <img src="point.gif" id="cross" style="position: relative; visibility: hidden; z-index:2"></div>  
+    <!-- <input type="text" id="caption" size="100" hidden="true" onkeypress="return enter_pressed(event)"/> -->
+    <button id="caption" style="visibility: hidden;">
+      <div class="emoji-container">
+        <div class="emoji like">
+          <div class="icon" data-title="Like"></div>
+        </div>
+        <div class="emoji love">
+          <div class="icon" data-title="Love"></div>
+        </div>
+        <div class="emoji haha">
+          <div class="icon" data-title="Haha"></div>
+        </div>
+        <div class="emoji wow">
+          <div class="icon" data-title="Wow"></div>
+        </div>
+        <div class="emoji sad">
+          <div class="icon" data-title="Sad"></div>
+        </div>
+        <div class="emoji angry">
+          <div class="icon" data-title="Angry"></div>
+        </div>
+        <div class="emoji">
+        <input type="input" placeholder="Enter Comment..."  id="caption-text" style="border: 0; font-size: 24px; margin: 10px; background-color: transparent; width: 180px"  onkeypress="return enter_pressed(event)" />
+      </div>
+      </div>
+    </button>
+	</body>
 </html>
