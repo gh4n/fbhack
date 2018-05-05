@@ -29,9 +29,9 @@
 
 </style>
 <script language="JavaScript">
-var points = [[127, 107, "Looking fine!"], [220, 170, "Nice!"], [220, 204, "HAHAHA!"]]
+var points = [{"id": 0, "x": 127, "y": 107, "text": "Hi"}, {"id": 1, "x": 220, "y": 170, "text": "Nice"}, {"id": 2, "x": 220, "y": 204, "text": "HAHAHA!"}]
 var a = [[84, 189], [266, 35], [276, 226], [96, 245], [154, 66], [214, 133]]
-
+var s_id = 3
 var x_to_add = 0
 var y_to_add = 0
 
@@ -67,13 +67,26 @@ function point_it(event){
 }
 	
 window.onload = function() {
+	var list = document.createElement('ul');
+	list.id = 'commentList'
+
 	for (var i = 0; i < points.length; i++) { 
-		create_node(points[i][0], points[i][1])
+		create_node(points[i].x, points[i].y)
+        var item = document.createElement('li');
+
+		var textNode = document.createTextNode(points[i].text)
+        item.appendChild(textNode);
+
+
+        list.appendChild(item);
+
 	}
+	document.getElementById('foo').appendChild(list);
+
 }
 
 function create_node(x, y, text="") {
-	var btn = document.createElement("PARAGRAPH");
+	var btn = document.createElement("P");
 	var t = document.createTextNode("+");
 	btn.style.size = "100";
 	btn.style.left = (x);
@@ -86,15 +99,21 @@ function create_node(x, y, text="") {
 		spanEl.className = "tooltiptext"
 		spanEl.textContent = text
 		btn.appendChild(spanEl)
-	}
+
+		var item = document.createElement('li')
+		item.appendChild(document.createTextNode(x + " " + y + " " + text))
+		var commentList = document.getElementById('commentList')
+		commentList.appendChild(item)
+	} 
 	btn.appendChild(t);
 	document.body.appendChild(btn);
+
+
 }
 
 function enter_pressed(e) {
     if (e.keyCode == 13) {
 		var caption_field = document.getElementById('caption')
-		console.log(caption_field.value)
         create_node(x_to_add, y_to_add, caption_field.value)
         return false;
     }
@@ -104,11 +123,12 @@ function enter_pressed(e) {
 </head>
 <body>
 
+
 <div id="pointer_div" onclick="point_it(event)" style = "background-image:url('eiffel.jpg');width:500px;height:333px;">
 <img src="point.gif" id="cross" style="position:relative;visibility:hidden;z-index:2;"></div>
 
 <input type="text" id="caption" size="100" hidden="true" onkeypress="return enter_pressed(event)"/>
 </form> 
-
+<div id='foo'></div>
 </body>
 </html>
